@@ -5,21 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "task".
+ * This is the model class for table "tasks".
  *
  * @property int $id
  * @property string $nombre
- * @property string $topic
- * @property string $created_at
+ * @property string $descripcion
+ * @property int $categoria
+ * @property int $created_at
  */
-class Task extends \yii\db\ActiveRecord
+class Tasks extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'task';
+        return 'tasks';
     }
 
     /**
@@ -28,10 +29,10 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'topic'], 'required'],
-            [['created_at'], 'safe'],
-            [['nombre'], 'string', 'max' => 250],
-            [['topic'], 'string', 'max' => 350],
+            [['nombre', 'descripcion', 'categoria', 'created_at'], 'required'],
+            [['descripcion'], 'string'],
+            [['categoria', 'created_at'], 'integer'],
+            [['nombre'], 'string', 'max' => 100],
         ];
     }
 
@@ -43,8 +44,10 @@ class Task extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'topic' => 'Topic',
+            'descripcion' => 'Descripcion',
+            'categoria' => 'Categoria',
             'created_at' => 'Created At',
         ];
     }
+
 }

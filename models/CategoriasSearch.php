@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Task;
+use app\models\Categorias;
 
 /**
- * TaskSearch represents the model behind the search form of `app\models\Task`.
+ * CategoriasSearch represents the model behind the search form of `app\models\Categorias`.
  */
-class TaskSearch extends Task
+class CategoriasSearch extends Categorias
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nombre', 'topic', 'created_at'], 'safe'],
+            [['id', 'nombre'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find();
+        $query = Categorias::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +58,8 @@ class TaskSearch extends Task
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
+            'nombre' => $this->nombre,
         ]);
-
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'topic', $this->topic]);
 
         return $dataProvider;
     }
